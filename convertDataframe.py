@@ -11,3 +11,5 @@ def convert_to_df(data):
     df["hour"]=df["TIME"].apply(lambda x: x.hour)
     df["minutes"]=df["TIME"].apply(lambda x: x.minute)
     df["seconds"]=df["TIME"].apply(lambda x: x.second)
+
+    return df
