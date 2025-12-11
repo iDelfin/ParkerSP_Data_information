@@ -28,15 +28,15 @@ jobs:
       - name: execute py script
         run: python main.py
 
-      - name: commit files
-        run: |
-          git config --local user.email "i.d.g2000@hotmail.com"
-          git config --local user.name "iDelfin"
-          git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "update logs" --allow-empty)
+#      - name: commit files
+#        run: |
+#          git config --local user.email "i.d.g2000@hotmail.com"
+#          git config --local user.name "iDelfin"
+#          git add -A
+#          git diff-index --quiet HEAD || (git commit -a -m "update logs" --allow-empty)
 
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+#      - name: push changes
+#        uses: ad-m/github-push-action@v0.6.0
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          branch: main
