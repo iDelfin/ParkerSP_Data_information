@@ -18,7 +18,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.13.2'
 
       - name: install python packages
         run: |
@@ -33,7 +33,7 @@ jobs:
           git config --local user.email "i.d.g2000@hotmail.com"
           git config --local user.name "iDelfin"
           git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "update logs" --allow-emty)
+          git diff-index --quiet HEAD || (git commit -a -m "update logs" --allow-empty)
 
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
