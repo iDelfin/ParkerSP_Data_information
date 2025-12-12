@@ -23,4 +23,4 @@ def dateProcess():
     last_date = df["TIME"][len(df["TIME"])-1].date()
     data_info = {"last_update": f"{last_date.year}-{last_date.month}-{last_date.day}"}
 
-    check_update(last_update, last_date, data_info)
+    check_update(last_date, data_info)
