@@ -16,11 +16,24 @@ def dateProcess():
         last_update = json.load(f)
 
     print(f"Time interval 2025-01-01 - {curr_date.date()}")
-    status, data = cdas.get_data("PSP_SWP_SPI_SF0A_L3_MOM", ["SUN_DIST", "MAGF_INST", "SC_VEL_RTN_SUN"], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+    PSP_status, PSP_data = cdas.get_data("PSP_SWP_SPI_SF0A_L3_MOM", ["SUN_DIST", "MAGF_INST", "SC_VEL_RTN_SUN"], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+    venus_status, venus_data = cdas.get_data("VENUS_HELIO1HR_POSITION", ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
 
-    df = convert_to_df(data)
+    # Dictionary of data last update
+    all_data_date_list = {}
 
-    last_date = df["TIME"][len(df["TIME"])-1].date()
-    data_info = {"last_update": f"{last_date.year}-{last_date.month}-{last_date.day}"}
+    # Planet Venus (Distance from sun to Venus)
+    venus_df = convert_to_df(venus_data, ['RAD_AU'])
 
-    check_update(last_date, data_info)
+    # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
+    PSP_df = convert_to_df(PSP_data, ["SUN_DIST", "MAGF_INST", "SC_VEL_RTN_SUN"])
+
+    # Checking Last data date of Venus
+    venus_last_date = venus_df["TIME"][len(venus_df["TIME"])-1].date()
+    all_data_date_list["last_update_venus"] = f"{venus_last_date.year}-{venus_last_date.month}-{venus_last_date.day}"
+
+    # Checking Last data date of Parker Space Probe
+    PSP_last_date = PSP_df["TIME"][len(PSP_df["TIME"])-1].date()
+    all_data_date_list["last_update_PSP"] = f"{PSP_last_date.year}-{PSP_last_date.month}-{PSP_last_date.day}"
+
+    check_update(PSP_last_date, all_data_date_list)
