@@ -1,13 +1,16 @@
 from convertDataframe import convert_to_df
 from dateUpdateCheck import check_update
 from datetime import datetime, timedelta
+from progressBar import progressBar
 from cdasws import CdasWs
 import pandas as pd
 import numpy as np
 import requests
 import json
+import os
 
 def dateProcess():
+    progress = 1
     cdas = CdasWs()
 
     curr_date = datetime.now()
@@ -23,10 +26,16 @@ def dateProcess():
     all_data_date_list = {}
 
     # Planet Venus (Distance from sun to Venus)
+    os.system("cls")
     venus_df = convert_to_df(venus_data, ['RAD_AU'])
+    print(progressBar(progress, 2))
+    progress+=1
 
     # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
+    os.system("cls")
     PSP_df = convert_to_df(PSP_data, ["SUN_DIST", "MAGF_INST", "SC_VEL_RTN_SUN"])
+    print(progressBar(progress, 2))
+    progress+=1
 
     # Checking Last data date of Venus
     venus_last_date = venus_df["TIME"][len(venus_df["TIME"])-1].date()
