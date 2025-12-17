@@ -20,15 +20,22 @@ def dateProcess():
 
     print(f"Time interval 2025-01-01 - {curr_date.date()}")
     PSP_status, PSP_data = cdas.get_data("PSP_SWP_SPI_SF0A_L3_MOM", ["SUN_DIST", "MAGF_INST", "SC_VEL_RTN_SUN"], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+    venus_status, venus_data = cdas.get_data("VENUS_HELIO1HR_POSITION", ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
     mars_status, mars_data = cdas.get_data("MARS_HELIO1DAY_POSITION", ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
 
     # Dictionary of data last update
     all_data_date_list = {}
 
+    # Planet Venus (Distance from sun to Venus)
+    os.system("cls")
+    venus_df = convert_to_df(venus_data, ['RAD_AU'])
+    print(progressBar(progress, 3))
+    progress+=1
+    
     # Planet Mars (Distance from sun to Venus)
     os.system("cls")
     mars_df = convert_to_df(mars_data, ['RAD_AU'])
-    print(progressBar(progress, 2))
+    print(progressBar(progress, 3))
     progress+=1
 
     # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
@@ -38,7 +45,8 @@ def dateProcess():
     progress+=1
 
     # Checking Last data date of Venus
-    venus_last_date = mars_df["TIME"][len(mars_df["TIME"])-1].date()
+    venus_last_date = venus_df["TIME"][len(venus_df["TIME"])-1].date()
+    mars_last_date = mars_df["TIME"][len(mars_df["TIME"])-1].date()
     all_data_date_list["last_update_venus"] = f"{venus_last_date.year}-{venus_last_date.month}-{venus_last_date.day}"
 
     # Checking Last data date of Parker Space Probe
