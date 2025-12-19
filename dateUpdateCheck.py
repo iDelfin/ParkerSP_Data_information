@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 import json
 
-def check_update(last_date, all_data_date_list):
+def check_update(all_data_date_list):
     msg_str =''
     for info_mission in all_data_date_list.keys():
         msg_str += (info_mission + f" : {all_data_date_list[info_mission]}\n")
