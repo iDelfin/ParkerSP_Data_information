@@ -42,7 +42,7 @@ def dateProcess():
 
     # Planet Venus (Distance from sun to Venus)
     os.system("cls")
-    mercury_df = convert_to_df(mercury_status, ['RAD_AU'])
+    mercury_df = convert_to_df(mercury_data, ['RAD_AU'])
 
     # Planet Venus (Distance from sun to Venus)
     os.system("cls")
