@@ -15,7 +15,7 @@ def dateProcess():
 
     curr_date = datetime.now()
     curr_date = curr_date - timedelta(days=1)
-    amount_data = 4
+    amount_data = 5
     with open('lastUpdate.json', 'r', encoding='utf-8') as f:
         last_update = json.load(f)
 
@@ -37,6 +37,10 @@ def dateProcess():
     print(progressBar(progress, amount_data))
     progress+=1	
 
+    jupiter_status, jupiter_data = cdas.get_data("JUPITER_HELIO1DAY_POSITION", ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+    print(progressBar(progress, amount_data))
+    progress+=1	
+
     # Dictionary of data last update
     all_data_date_list = {}
 
@@ -51,6 +55,10 @@ def dateProcess():
     # Planet Mars (Distance from sun to Venus)
     os.system("cls")
     mars_df = convert_to_df(mars_data, ['RAD_AU'])
+
+    # Planet Jupiter (Distance from sun to Jupiter)
+    os.system("cls")
+    jupiter_df = convert_to_df(jupiter_data, ['RAD_AU'])
 
     # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
     os.system("cls")
@@ -67,6 +75,10 @@ def dateProcess():
 
     mars_last_date = mars_df["TIME"][len(mars_df["TIME"])-1].date()
     all_data_date_list["last_update_mars"] = f"{mars_last_date.year}-{mars_last_date.month}-{mars_last_date.day}"
+
+    # Checking Last data date of Jupiter
+    jupiter_last_date = jupiter_df["TIME"][len(jupiter_df["TIME"])-1].date()
+    all_data_date_list["last_update_jupiter"] = f"{jupiter_last_date.year}-{jupiter_last_date.month}-{jupiter_last_date.day}"
 
     # Checking Last data date of Parker Space Probe
     PSP_last_date = PSP_df["TIME"][len(PSP_df["TIME"])-1].date()
