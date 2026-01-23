@@ -1,6 +1,6 @@
 import time
 
-def progressBar(sub_title, part, total, length=50):
+def progressBar(part, total, length=50, sub_title=""):
     frac = part/total
     completed = int(frac * length)
     missing = length - completed
