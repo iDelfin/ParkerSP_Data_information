@@ -1,2 +1,2 @@
-# ParkerSP_Data_information
-One will find in this document code that retrieves data from NASAs Parker Space Probe and sends a Push Notification to ntfy when new data arrives
+# ParkerSP_Data_information Notebook
+This branch was created to explore the data and see how is can be use. Basically a test branch.
