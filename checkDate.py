@@ -3,6 +3,7 @@ from dateUpdateCheck import check_update
 from datetime import datetime, timedelta
 from printSolar import printSolarSystem
 from progressBar import progressBar
+from scientificData import MissionCall
 from cdasws import CdasWs
 import pandas as pd
 import numpy as np
