@@ -1,12 +1,13 @@
 {
-    "last_update_Mercury": "2026-2-26",
-    "last_update_Venus": "2026-2-26",
-    "last_update_Earth": "2026-2-26",
-    "last_update_Mars": "2026-2-26",
-    "last_update_Jupiter": "2026-2-26",
-    "last_update_Saturn": "2026-2-26",
-    "last_update_Uranus": "2026-2-26",
-    "last_update_Neptune": "2026-2-26",
-    "last_update_Pluto": "2026-2-26",
-    "last_update_PSP": "2025-7-31"
+    "last_update_Mercury": "2026-10-10",
+    "last_update_Venus": "2026-10-10",
+    "last_update_Earth": "2026-10-10",
+    "last_update_Mars": "2026-10-10",
+    "last_update_Jupiter": "2026-10-10",
+    "last_update_Saturn": "2026-10-10",
+    "last_update_Uranus": "2026-10-10",
+    "last_update_Neptune": "2026-10-10",
+    "last_update_Pluto": "2026-10-10",
+    "last_update_PSP_HELIO1HR_POSITION": "2026-10-10",
+    "last_update_PSP_COHO1HR_MERGED_MAG_PLASMA": "2026-10-10"
 }
