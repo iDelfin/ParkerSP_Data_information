@@ -3,6 +3,7 @@ from dateUpdateCheck import check_update
 from datetime import datetime, timedelta
 from printSolar import printSolarSystem
 from progressBar import progressBar
+from scientificData import MissionCall
 from cdasws import CdasWs
 import pandas as pd
 import numpy as np
@@ -26,11 +27,21 @@ def dateProcess():
     # pd I know that pluto is not a planet, but I'm a GenX dude who misses pluto :c
     planet_data = []
     planet_df = []
+    # Missions dictionary
+    miss_dict = {
+        "PSP_HELIO1HR_POSITION": ["RAD_AU"],
+        "PSP_COHO1HR_MERGED_MAG_PLASMA": ["ProtonSpeed", "protonDensity", "protonTemp"]
+    }
+    mission_df = []
     # Dictionary of data last update
     all_data_date_list = {}
     amount_data = len(planets_datasets)
     
-    PSP_status, PSP_data = cdas.get_data("PSP_HELIO1HR_POSITION", ["RAD_AU"], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+    #PSP_status, PSP_data = cdas.get_data("PSP_HELIO1HR_POSITION", ["RAD_AU"], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+    for num_ide, id_m in zip(range(0,len(miss_dict)),miss_dict.keys()):
+        m_O = MissionCall(num_ide, id_m, miss_dict[id_m])
+        mission_df.append(m_O.observe_data_df())
+
     os.system("cls")
     print(progressBar(progress, amount_data))
     progress+=1
@@ -48,7 +59,7 @@ def dateProcess():
 
     # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
     os.system("cls")
-    PSP_df = convert_to_df(PSP_data, ["RAD_AU"])
+    #PSP_df = convert_to_df(PSP_data, ["RAD_AU"])
 
 
     for p_df, plane in zip(planet_df, planets):
@@ -57,8 +68,11 @@ def dateProcess():
         all_data_date_list[f"last_update_{plane}"] = f"{last_date.year}-{last_date.month}-{last_date.day}"
 
     # Checking Last data date of Parker Space Probe
-    PSP_last_date = PSP_df["TIME"][len(PSP_df["TIME"])-1].date()
-    all_data_date_list["last_update_PSP"] = f"{PSP_last_date.year}-{PSP_last_date.month}-{PSP_last_date.day}"
+    for m_df, id_n in zip(mission_df, miss_dict.keys()):
+        #print(m_df)
+        print(m_df.columns)
+        PSP_last_date = m_df["TIME"][len(m_df["TIME"])-1].date()
+        all_data_date_list[f"last_update_{id_n}"] = f"{PSP_last_date.year}-{PSP_last_date.month}-{PSP_last_date.day}"
 
     check_update(all_data_date_list)
     printSolarSystem(planet_df, planets_datasets, planets)
