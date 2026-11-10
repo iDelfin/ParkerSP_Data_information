@@ -45,9 +45,10 @@ def dateProcess():
     print(progressBar(progress, amount_data))
     progress+=1
 
-    for num_p_id, p_ds in zip(range(0,amount_data), planets_datasets):
+    for num_p_id, p_ds in zip(planets, planets_datasets):
         m_O_p = MissionCall(num_p_id, p_ds)
         #p_status, p_data = cdas.get_data(p_ds, ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+        m_O_p.mission_brief()
         df_coord_convert = m_O_p.convert_coord(m_O_p.observe_data_df())
         print(df_coord_convert["Object_Name"].unique())
         planet_data.append(df_coord_convert)

@@ -34,7 +34,6 @@ class MissionCall:
         return df_return
 
     def convert_coord(self, df_md: pd.DataFrame):
-        
         df_md["Object_Name"] = self.mission_name
         theta_lat_se = np.radians(df_md["SE_LAT"])
         phi_lon_se = np.radians(df_md["SE_LON"])
