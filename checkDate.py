@@ -46,23 +46,29 @@ def dateProcess():
     print(progressBar(progress, amount_data))
     progress+=1
 
-    for p_ds in planets_datasets:
-        p_status, p_data = cdas.get_data(p_ds, ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
-        planet_data.append(p_data)
+    for num_p_id, p_ds in zip(planets, planets_datasets):
+        m_O_p = MissionCall(num_p_id, p_ds)
+        #p_status, p_data = cdas.get_data(p_ds, ['RAD_AU'], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
+        m_O_p.mission_brief()
+        df_coord_convert = m_O_p.convert_coord(m_O_p.observe_data_df())
+        print(df_coord_convert["Object_Name"].unique())
+        planet_data.append(df_coord_convert)
         os.system("cls")
         print(progressBar(progress, amount_data))
         progress+=1
 
-    for planet_d in planet_data:
-        # Planet Venus (Distance from sun to Venus)
-        planet_df.append(convert_to_df(planet_d, ['RAD_AU']))
+    ######## Remove as line 51 resolves this ########
+    # for planet_d in planet_data:
+    #     # Planet Venus (Distance from sun to Venus)
+    #     planet_df.append(convert_to_df(planet_d, ['RAD_AU']))
+    #################################################
 
     # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
     os.system("cls")
     #PSP_df = convert_to_df(PSP_data, ["RAD_AU"])
 
 
-    for p_df, plane in zip(planet_df, planets):
+    for p_df, plane in zip(planet_data, planets):
         # Checking Last data date of Mercury
         last_date = p_df["TIME"][len(p_df["TIME"])-1].date()
         all_data_date_list[f"last_update_{plane}"] = f"{last_date.year}-{last_date.month}-{last_date.day}"
