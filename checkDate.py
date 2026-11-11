@@ -26,7 +26,6 @@ def dateProcess():
     planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Parker Space Probe (PSP)"]
     # pd I know that pluto is not a planet, but I'm a GenX dude who misses pluto :c
     planet_data = []
-    planet_df = []
     # Missions dictionary
     miss_dict = {
         "PSP_COHO1HR_MERGED_MAG_PLASMA": ["ProtonSpeed", "protonDensity", "protonTemp"]
@@ -61,7 +60,7 @@ def dateProcess():
     # for planet_d in planet_data:
     #     # Planet Venus (Distance from sun to Venus)
     #     planet_df.append(convert_to_df(planet_d, ['RAD_AU']))
-    #################################################
+    ######### Will remove this in futer versions ####################
 
     # Parker Space Probe data (Distance to the Sun, Magnification & Velocit of Space Probe relative to the Sun)
     os.system("cls")
@@ -80,4 +79,4 @@ def dateProcess():
         all_data_date_list[f"last_update_{id_n}"] = f"{PSP_last_date.year}-{PSP_last_date.month}-{PSP_last_date.day}"
 
     check_update(all_data_date_list, mission_df)
-    printSolarSystem(planet_df, planets_datasets, planets)
+    printSolarSystem(planet_data, planets_datasets, planets)
