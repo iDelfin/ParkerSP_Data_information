@@ -22,20 +22,20 @@ def dateProcess():
 
     print(f"Time interval 2025-01-01 - {curr_date.date()}")
     
-    planets_datasets = ["MERCURY_HELIO1HR_POSITION", "VENUS_HELIO1HR_POSITION", "EARTH_HELIO1HR_POSITION", "MARS_HELIO1HR_POSITION", "JUPITER_HELIO1HR_POSITION", "SATURN_HELIO1HR_POSITION", "URANUS_HELIO1HR_POSITION", "NEPTUNE_HELIO1HR_POSITION", "PLUTO_HELIO1HR_POSITION"]
-    planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+    planets_datasets = ["MERCURY_HELIO1HR_POSITION", "VENUS_HELIO1HR_POSITION", "EARTH_HELIO1HR_POSITION", "MARS_HELIO1HR_POSITION", "JUPITER_HELIO1HR_POSITION", "SATURN_HELIO1HR_POSITION", "URANUS_HELIO1HR_POSITION", "NEPTUNE_HELIO1HR_POSITION", "PLUTO_HELIO1HR_POSITION", "PSP_HELIO1HR_POSITION"]
+    planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Parker Space Probe (PSP)"]
     # pd I know that pluto is not a planet, but I'm a GenX dude who misses pluto :c
     planet_data = []
     planet_df = []
     # Missions dictionary
     miss_dict = {
-        "PSP_HELIO1HR_POSITION": ["RAD_AU"],
         "PSP_COHO1HR_MERGED_MAG_PLASMA": ["ProtonSpeed", "protonDensity", "protonTemp"]
     }
     mission_df = []
     # Dictionary of data last update
     all_data_date_list = {}
-    amount_data = len(planets_datasets)
+    # added the len of the missions dict to have the real amount of prosses (Issue #69)
+    amount_data = len(planets_datasets) + len(miss_dict)
     
     #PSP_status, PSP_data = cdas.get_data("PSP_HELIO1HR_POSITION", ["RAD_AU"], "2025-01-01T04:04:15.000Z", f"{curr_date.year}-{curr_date.month}-{curr_date.day}T00:00:00.000Z")
     for num_ide, id_m in zip(range(0,len(miss_dict)),miss_dict.keys()):
@@ -70,10 +70,8 @@ def dateProcess():
     # Checking Last data date of Parker Space Probe
     for m_df, id_n in zip(mission_df, miss_dict.keys()):
         #print(m_df)
-        print(m_df.columns)
         PSP_last_date = m_df["TIME"][len(m_df["TIME"])-1].date()
         all_data_date_list[f"last_update_{id_n}"] = f"{PSP_last_date.year}-{PSP_last_date.month}-{PSP_last_date.day}"
 
-    check_update(all_data_date_list)
+    check_update(all_data_date_list, mission_df)
     printSolarSystem(planet_df, planets_datasets, planets)
-    
