@@ -6,7 +6,7 @@ Saluton, mi estas iDelfin !!!
 
 This project aims to achive the creation of a interactive map of the solar system and some active mission that can be found and maped.
 
-![solar System plot](.\Result\SolarSystem\solar_sistem_plt.png)
+![solar System plot](/Result/SolarSystem/solar_sistem_plt.png)
 
 ### Current Status
 The project is still in development (and I'm one person with less free time than I would like :c) and for the moment have only developed a plot of all the celectial bodies adn objects in a lis
