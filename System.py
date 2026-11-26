@@ -5,16 +5,21 @@ import seaborn as sns
 
 
 class System:
-    def __init__(self, name: str, type: str, orbitation: list):
+    def __init__(self, name: str, s_type: str, orbitation: list):
         self.name = name
-        self.type = type
+        self.star_type = s_type
         self.orbit = orbitation
 
     def printSystem(self):
-        final_df_mis = pd.DataFrame(columns=["RAD_AU", "HG_LAT", "HG_LON", "SE_LAT", "SE_LON", "TIME", "x_se_plane", "y_se_plane", "z_se_plane", "x_hg_plane", "y_hg_plane", "z_hg_plane"])
+        #final_df_mis = pd.DataFrame(columns=["RAD_AU", "HG_LAT", "HG_LON", "SE_LAT", "SE_LON", "TIME", "x_se_plane", "y_se_plane", "z_se_plane"])
+        dict_plot_sys = {"x_se_plane":[],"y_se_plane":[],"Object_Name":[]}
         for object_df in self.orbit:
-            final_df_mis = pd.concat([final_df_mis, object_df], axis=0, ignore_index=True)
-    
+            dict_plot_sys["x_se_plane"].append(object_df.curr_se_lon)
+            dict_plot_sys["y_se_plane"].append(object_df.curr_se_lat)
+            dict_plot_sys["Object_Name"].append(object_df.name)
+            #final_df_mis = pd.concat([final_df_mis, object_df], axis=0, ignore_index=True)
+        final_df_mis = pd.DataFrame.from_dict(dict_plot_sys)
+
         plt.figure(figsize=(20,20))
         #sns.dark_palette("#b285bc", as_cmap=True)
         sns.set_style("darkgrid")

@@ -4,7 +4,9 @@ from datetime import datetime, timedelta
 from printSolar import printSolarSystem
 from progressBar import progressBar
 from scientificData import MissionCall
+from System import System
 from cdasws import CdasWs
+from orbitObject import OrbitObject
 import pandas as pd
 import numpy as np
 import requests
@@ -80,4 +82,14 @@ def dateProcess():
         all_data_date_list[f"last_update_{id_n}"] = f"{PSP_last_date.year}-{PSP_last_date.month}-{PSP_last_date.day}"
 
     check_update(all_data_date_list, mission_df)
-    printSolarSystem(planet_df, planets_datasets, planets)
+
+    print("Creating solar system...")
+    objects_around = []
+    with open("object_tracking.json", "r") as file:
+        data = json.load(file)
+    for planet_name, dataset in zip(data.keys(), data.values()):
+        temp_ob = OrbitObject(planet_name, dataset, "O")
+        objects_around.append(temp_ob)
+    sol_system = System("Solar", "K", objects_around)
+    sol_system.printSystem()
+    #printSolarSystem(planet_df, planets_datasets, planets)

@@ -1,0 +1,12 @@
+{
+    "Mercury":"MERCURY_HELIO1HR_POSITION", 
+    "Venus":"VENUS_HELIO1HR_POSITION", 
+    "Earth": "EARTH_HELIO1HR_POSITION", 
+    "Mars": "MARS_HELIO1HR_POSITION", 
+    "Jupiter": "JUPITER_HELIO1HR_POSITION", 
+    "Saturn": "SATURN_HELIO1HR_POSITION", 
+    "Uranus": "URANUS_HELIO1HR_POSITION", 
+    "Neptune": "NEPTUNE_HELIO1HR_POSITION", 
+    "Pluto": "PLUTO_HELIO1HR_POSITION", 
+    "Parker Space Probe (PSP)": "PSP_HELIO1HR_POSITION"
+}
