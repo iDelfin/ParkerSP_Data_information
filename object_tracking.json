@@ -1,12 +1,46 @@
 {
-    "Mercury":"MERCURY_HELIO1HR_POSITION", 
-    "Venus":"VENUS_HELIO1HR_POSITION", 
-    "Earth": "EARTH_HELIO1HR_POSITION", 
-    "Mars": "MARS_HELIO1HR_POSITION", 
-    "Jupiter": "JUPITER_HELIO1HR_POSITION", 
-    "Saturn": "SATURN_HELIO1HR_POSITION", 
-    "Uranus": "URANUS_HELIO1HR_POSITION", 
-    "Neptune": "NEPTUNE_HELIO1HR_POSITION", 
-    "Pluto": "PLUTO_HELIO1HR_POSITION", 
-    "Parker Space Probe (PSP)": "PSP_HELIO1HR_POSITION"
+    "Mercury":{
+        "id":"MERCURY_HELIO1HR_POSITION",
+        "type":"O"
+    }, 
+    "Venus":{
+        "id":"VENUS_HELIO1HR_POSITION",
+        "type":"O"
+    }, 
+    "Earth": {
+        "id":"EARTH_HELIO1HR_POSITION", 
+        "type":"O"
+    },
+    "Mars": {
+        "id":"MARS_HELIO1HR_POSITION", 
+        "type":"O"
+    },
+    "Jupiter": {
+        "id":"JUPITER_HELIO1HR_POSITION", 
+        "type":"O"
+    },
+    "Saturn": {
+        "id":"SATURN_HELIO1HR_POSITION", 
+        "type":"O"
+    },
+    "Uranus": {
+        "id":"URANUS_HELIO1HR_POSITION", 
+        "type":"O"
+    },
+    "Neptune": {
+        "id":"NEPTUNE_HELIO1HR_POSITION", 
+        "type":"O"
+    },
+    "Pluto": {
+        "id":"PLUTO_HELIO1HR_POSITION",  
+        "type":"O"
+    },
+    "Parker Space Probe (PSP)": {
+        "id":"PSP_HELIO1HR_POSITION",  
+        "type":"M",
+        "science_info":{
+            "science_id": "PSP_COHO1HR_MERGED_MAG_PLASMA",
+            "science_columns": ["ProtonSpeed", "protonDensity", "protonTemp"]
+        }
+    }
 }

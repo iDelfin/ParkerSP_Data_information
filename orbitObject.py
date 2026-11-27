@@ -4,12 +4,12 @@ import pandas as pd
 import numpy as np
 
 class OrbitObject:
-    def __init__(self, name: str, dataset_id: str, o_type: str):
+    def __init__(self, name: str, dataset_id: str, tail_d:int = 500):
 
         # Assigne context variables
         self.name = name
         self.ds_id = dataset_id
-        self.o_type = o_type
+        self.tail_d = tail_d
 
         # Start of coord calculation
         # Defin object of CdasWS
@@ -40,6 +40,10 @@ class OrbitObject:
         df_data["y_se_plane"] = (df_data["RAD_AU"] * np.cos(theta_lat_se) * np.sin(phi_lon_se))
         df_data["z_se_plane"] = (df_data["RAD_AU"] * np.sin(theta_lat_se))
 
+        # Asigne the tail of plot
+        self.se_lon_list_tail = df_data["x_se_plane"].iloc[-self.tail_d:]
+        self.se_lat_list_tail = df_data["y_se_plane"].iloc[-self.tail_d:]
+
         # Assigne the current position to plot
         self.curr_se_lon = df_data["x_se_plane"].iloc[-1]
         self.curr_se_lat = df_data["y_se_plane"].iloc[-1]
@@ -47,8 +51,11 @@ class OrbitObject:
 
     def printGeneralInfo(self):
         print(f"{self.name}\nDistance:\t{self.distance_au:5f}")
-        if(self.o_type == "M"):
-            print(f"Mission in System")
 
     def showInMap(self):
         print(f"Still in dev... chowy :c")
+
+class MissionType(OrbitObject):
+    def printGeneralInfo(self):
+        super().printGeneralInfo()
+        print("Mission from earth")
